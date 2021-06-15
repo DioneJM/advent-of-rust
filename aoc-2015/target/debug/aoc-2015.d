@@ -1,0 +1,1 @@
+/Users/dionemorales/Development/advent-of-rust/aoc-2015/target/debug/aoc-2015: /Users/dionemorales/Development/advent-of-rust/aoc-2015/src/day1.rs /Users/dionemorales/Development/advent-of-rust/aoc-2015/src/main.rs
