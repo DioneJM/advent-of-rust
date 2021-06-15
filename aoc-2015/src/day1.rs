@@ -1,11 +1,8 @@
-use std::fs;
-use std::fs::File;
-use std::path::{Path, PathBuf};
-use std::error::Error;
-use std::io::Read;
+
+use super::utils::get_input;
 
 pub fn day1_solve() {
-    let input_text = get_input("/Users/dionemorales/Development/advent-of-rust/aoc-2015/src/inputs/day1.txt");
+    let input_text = get_input("day1");
     if let Ok(input) = input_text {
         day1_part1_solve(&input);
         day1_part2_solve(&input);
@@ -38,9 +35,4 @@ fn day1_part2_solve(input: &String) {
             visited_basement = true;
         }
     });
-}
-
-fn get_input(file_path: &str) -> Result<String, Box<dyn Error>> {
-    let contents = fs::read_to_string(Path::new(file_path))?;
-    Ok(contents)
 }
