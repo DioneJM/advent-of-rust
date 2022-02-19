@@ -5,7 +5,8 @@ mod day1;
 pub mod challenge;
 
 fn main() {
-    let day1 = Day1Solver::new("inputs/day1.txt".into());
+    let day1 = Day1Solver::parse("inputs/day1.txt".into());
+    let day1_solution = day1.solve_all();
 
-    day1.solve_part_one();
+    println!("day1:\nPart 1: {}\nPart 2: {}", day1_solution.0, day1_solution.1);
 }
