@@ -1,8 +1,9 @@
 use crate::challenge::ChallengeSolver;
 use crate::day1::solver::Day1Solver;
+pub mod challenge;
 
 mod day1;
-pub mod challenge;
+mod day2;
 
 fn main() {
     let day1 = Day1Solver::parse("inputs/day1.txt".into());
