@@ -16,14 +16,14 @@ impl Day1Solver {
         }
     }
 
-    fn get_measurements(&self) -> Vec<i64> {
-        self.input.lines().map(|line| {
+    fn get_measurements(input: &String) -> Vec<i64> {
+        input.lines().map(|line| {
             let measurement: i64 = line.trim().parse::<i64>().unwrap();
             measurement
         }).collect()
     }
 
-    fn calculate_measurement_increase(&self, measurements: Vec<i64>) -> i64 {
+    fn calculate_measurement_increase(measurements: Vec<i64>) -> i64 {
         let mut count = 0;
         let mut previous_measurement = None;
         for measurement in measurements {
@@ -43,12 +43,14 @@ impl Day1Solver {
 
 impl ChallengeSolver for Day1Solver {
     fn solve_part_one(&self) -> String {
-        self.calculate_measurement_increase(self.get_measurements()).to_string()
+        Day1Solver::calculate_measurement_increase(
+            Day1Solver::get_measurements(&self.input)
+        ).to_string()
     }
 
     fn solve_part_two(&self) -> String {
         let mut window_measurements: Vec<i64> = vec![];
-        let measurements = self.get_measurements();
+        let measurements = Day1Solver::get_measurements(&self.input);
         for (idx, current) in measurements.iter().enumerate() {
             if idx != 0 {
                 let previous = measurements.get(max((idx as i32) - 1, 0) as usize);
@@ -62,7 +64,7 @@ impl ChallengeSolver for Day1Solver {
                 }
             }
         }
-        self.calculate_measurement_increase(window_measurements).to_string()
+        Day1Solver::calculate_measurement_increase(window_measurements).to_string()
     }
 }
 
