@@ -1,6 +1,7 @@
 use crate::challenge::ChallengeSolver;
 use crate::day1::solver::Day1Solver;
 use crate::day2::solver::Day2Solver;
+use crate::day3::solver::Day3Solver;
 
 pub mod challenge;
 
@@ -17,4 +18,8 @@ fn main() {
     let day2 = Day2Solver::parse("inputs/day2.txt".into());
     let day2_solution = day2.solve_all();
     println!("day2:\nPart 1: {}\nPart 2: {}", day2_solution.0, day2_solution.1);
+
+    let day3 = Day3Solver::parse("inputs/day3.txt".into());
+    let day3_solution = day3.solve_all();
+    println!("day2:\nPart 1: {}\nPart 2: {}", day3_solution.0, day3_solution.1);
 }
