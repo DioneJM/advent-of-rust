@@ -17,14 +17,41 @@ impl Day3Solver {
             input,
         }
     }
-
 }
 
 impl ChallengeSolver for Day3Solver {
     fn solve_part_one(&self) -> String {
-        "198".to_string()
+        let binary_numbers = self.input.lines();
+        let number_length = &binary_numbers.clone().enumerate().into_iter().next().unwrap().1.len();
+        let mut gamma_rate_binary = vec![0; number_length.clone()];
+        binary_numbers.for_each(|number| {
+            for (idx, character) in number.chars().into_iter().enumerate() {
+                let bit_value = character.to_string().parse::<u8>().unwrap();
+                match bit_value {
+                    1 => gamma_rate_binary[idx] = gamma_rate_binary[idx] + 1,
+                    0 => gamma_rate_binary[idx] = gamma_rate_binary[idx] - 1,
+                    _ => panic!("invalid bit value detected: {}", bit_value)
+                }
+            }
+        });
+        let gamma_rate = gamma_rate_binary
+            .into_iter()
+            .map(|occurences| {
+                if occurences > 0 {
+                    "1".to_string()
+                } else if occurences < 0 {
+                    "0".to_string()
+                } else {
+                    panic!("An even amount of 1's and 0's has been found")
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("");
+        let gamma_rate = i64::from_str_radix(gamma_rate.as_str(), 2).unwrap();
+        let epsilon_rate = 1;
+        let power_consumption = gamma_rate * epsilon_rate;
+        power_consumption.to_string()
     }
-
 }
 
 #[cfg(test)]
