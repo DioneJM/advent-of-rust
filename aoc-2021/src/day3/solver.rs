@@ -1,6 +1,4 @@
 use std::fs;
-use std::iter::Map;
-use std::str::Lines;
 use crate::ChallengeSolver;
 
 pub struct Day3Solver {
@@ -34,21 +32,26 @@ impl ChallengeSolver for Day3Solver {
                 }
             }
         });
-        let gamma_rate = gamma_rate_binary
+        let mut epsilon = String::new();
+        let mut gamma_rate = String::new();
+
+        gamma_rate_binary
             .into_iter()
-            .map(|occurences| {
+            .for_each(|occurences| {
                 if occurences > 0 {
-                    "1".to_string()
+                    gamma_rate.push('1');
+                    epsilon.push('0');
                 } else if occurences < 0 {
-                    "0".to_string()
+                    gamma_rate.push('0');
+                    epsilon.push('1');
                 } else {
                     panic!("An even amount of 1's and 0's has been found")
                 }
-            })
-            .collect::<Vec<String>>()
-            .join("");
+            });
+
         let gamma_rate = i64::from_str_radix(gamma_rate.as_str(), 2).unwrap();
-        let epsilon_rate = 1;
+        // todo figure how to calculate this by just getting the compliment of gamma_rate
+        let epsilon_rate = i64::from_str_radix(epsilon.as_str(), 2).unwrap();
         let power_consumption = gamma_rate * epsilon_rate;
         power_consumption.to_string()
     }
@@ -76,7 +79,6 @@ mod tests {
         let solver = Day3Solver {
             input
         };
-        let mut power_consumption = solver.solve_part_one();
         assert_eq!(solver.solve_part_one().parse::<i64>().unwrap(), 198);
     }
 }
